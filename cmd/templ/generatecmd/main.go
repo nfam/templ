@@ -6,6 +6,8 @@ import (
 	"log/slog"
 
 	_ "net/http/pprof"
+
+	"github.com/a-h/templ/generator"
 )
 
 type Arguments struct {
@@ -24,6 +26,7 @@ type Arguments struct {
 	GenerateSourceMapVisualisations bool
 	IncludeVersion                  bool
 	IncludeTimestamp                bool
+	Stripspace                      bool
 	// PPROFPort is the port to run the pprof server on.
 	PPROFPort         int
 	KeepOrphanedFiles bool
@@ -35,5 +38,6 @@ func Run(ctx context.Context, log *slog.Logger, args Arguments) (err error) {
 	if err != nil {
 		return err
 	}
+	generator.Stripspace = args.Stripspace
 	return g.Run(ctx)
 }

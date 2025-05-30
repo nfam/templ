@@ -208,6 +208,7 @@ func generateCmd(stdout, stderr io.Writer, args []string) (code int) {
 	sourceMapVisualisationsFlag := cmd.Bool("source-map-visualisations", false, "")
 	includeVersionFlag := cmd.Bool("include-version", true, "")
 	includeTimestampFlag := cmd.Bool("include-timestamp", false, "")
+	stripspaceFlag := cmd.Bool("stripspace", false, "")
 	watchFlag := cmd.Bool("watch", false, "")
 	watchPatternFlag := cmd.String("watch-pattern", "(.+\\.go$)|(.+\\.templ$)", "")
 	openBrowserFlag := cmd.Bool("open-browser", true, "")
@@ -265,6 +266,7 @@ func generateCmd(stdout, stderr io.Writer, args []string) (code int) {
 		GenerateSourceMapVisualisations: *sourceMapVisualisationsFlag,
 		IncludeVersion:                  *includeVersionFlag,
 		IncludeTimestamp:                *includeTimestampFlag,
+		Stripspace:                      *stripspaceFlag,
 		PPROFPort:                       *pprofPortFlag,
 		KeepOrphanedFiles:               *keepOrphanedFilesFlag,
 		Lazy:                            *lazyFlag,

@@ -19,6 +19,8 @@ import (
 	"github.com/a-h/templ/parser/v2"
 )
 
+var Stripspace bool
+
 type GenerateOpt func(g *generator) error
 
 // WithVersion enables the version to be included in the generated code.
@@ -635,6 +637,12 @@ func (g *generator) writeNode(indentLevel int, current parser.Node, next parser.
 }
 
 func isInlineOrText(next parser.Node) bool {
+	// When in the stripspace mode, if there is a newline, remove it and
+	// all the whitespace before and after.
+	if Stripspace {
+		return false
+	}
+
 	// While these are formatted as blocks when they're written in the HTML template.
 	// They're inline - i.e. there's no whitespace rendered around them at runtime for minification.
 	if next == nil {
